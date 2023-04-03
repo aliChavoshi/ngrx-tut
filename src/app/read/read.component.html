@@ -1,8 +1,18 @@
 <div class="right" *ngIf="tutorials$">
   <h3>Tutorials</h3>
+  {{isEdit}}
+  <div>
+    <form [formGroup]="form" (ngSubmit)="editTutorial()" *ngIf="isEdit">
+      <input type="text" formControlName="name" placeholder="name" />
+      <input type="text" formControlName="url" placeholder="url" />
+      <button type="submit">Update</button>
+    </form>
+  </div>
   <ul>
-    <li (click)="delTutorial(item.id)" *ngFor="let item of tutorials$ | async">
+    <li *ngFor="let item of tutorials$ | async; let i = index">
       <a [href]="item.url" target="_blank">{{ item.name }}</a>
+      <button (click)="delTutorial(i)">Delete</button>
+      <button (click)="addToEdit(item, i)">Edit</button>
     </li>
   </ul>
 </div>

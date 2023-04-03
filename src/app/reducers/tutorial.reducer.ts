@@ -1,20 +1,32 @@
 import { ITutorial } from '../models/tutorial';
-import * as TutorialActions from './../actions/tutorial.action';
+import {
+  ActionsTutorial,
+  EditTutorial,
+  RemoveTutorial,
+  TutorialTypeNames,
+} from './../actions/tutorial.action';
 
 const initialState: ITutorial = {
-  id: 1,
   name: 'initial Tutorial',
   url: 'https://www.google.com',
 };
 
 export function reducer(
   state: ITutorial[] = [initialState],
-  action: TutorialActions.Actions
+  action: ActionsTutorial
 ): ITutorial[] {
   switch (action.type) {
-    case TutorialActions.TutorialTypeNames.ADD_TUTORIAL:
+    case TutorialTypeNames.ADD_TUTORIAL:
       return [...state, action.payload as ITutorial];
-
+    case TutorialTypeNames.REMOVE_TUTORIAL:
+      var index = action.payload as number;
+      const item = state[index];
+      return state.filter((x) => x.name !== item.name);
+    case TutorialTypeNames.EDIT_TUTORIAL:
+      var { index, payload } = action as EditTutorial;
+      return state.map((tutorial, i) =>
+        i === index ? { ...tutorial, ...payload } : tutorial
+      );
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
-import * as TutorialActions from './../actions/tutorial.action';
+import { AddTutorial } from './../actions/tutorial.action';
 
 @Component({
   selector: 'app-create',
@@ -10,13 +10,9 @@ import * as TutorialActions from './../actions/tutorial.action';
 })
 export class CreateComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
-  
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
+  ngOnInit(): void {}
   addTutorial(name: string, url: string) {
-    this.store.dispatch(
-      new TutorialActions.AddTutorial({ name, url, id: Date.now.toString() })
-    );
+    this.store.dispatch(new AddTutorial({ name, url }));
   }
 }

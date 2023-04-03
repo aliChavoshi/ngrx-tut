@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { ReadComponent } from './read/read.component';
 import { CreateComponent } from './create/create.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CreateComponent } from './create/create.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
